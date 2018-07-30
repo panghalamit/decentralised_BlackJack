@@ -71,8 +71,8 @@ contract Casino{
         }
         if(dealerScore < 21) {
             for(i=0; i<ace_count; i++) {
-                if(dealerScore+9 <= 21)
-                    dealerScore+=9;
+                if(dealerScore+10 <= 21)
+                    dealerScore+=10;
             }
         }
     }
@@ -94,6 +94,8 @@ contract Casino{
                 card_found=true;
             }
         }
+
+        if(card > 10) card = 10;
         
     }
     
@@ -107,7 +109,7 @@ contract Casino{
         cards_opened[num_opened++] = _playerCards[1];
         player_count += _playerCards[0];
         player_count += _playerCards[1];
-        if(player_count+9 == 21) {
+        if(player_count+10 == 21) {
             _endgame();
         } else 
         bet_start = now;
@@ -141,8 +143,8 @@ contract Casino{
          uint8 dealerScore=_revealDealerCards();
         _result = false;
         for(uint8 i=0; i<num_opened; i++) {
-            if(cards_opened[i] == 1 && player_count+9 <= 21)
-                player_count+=9;
+            if(cards_opened[i] == 1 && player_count+10 <= 21)
+                player_count+=10;
         }
         if(player_count > 21 ) {
             //bust
